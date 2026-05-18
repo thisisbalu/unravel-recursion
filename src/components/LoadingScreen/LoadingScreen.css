@@ -1,0 +1,77 @@
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 340px;
+}
+
+.loading-logo {
+  text-align: center;
+}
+
+.loading-logo h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0.25rem 0 0;
+  letter-spacing: -0.5px;
+}
+
+.tagline {
+  color: var(--text-3);
+  font-size: 0.95rem;
+  margin: 0.25rem 0 0;
+}
+
+.progress-container {
+  width: 100%;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #8b5cf6);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.stage-label {
+  color: var(--text-2);
+}
+
+.percent-label {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.once-notice {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  text-align: center;
+  margin: 0;
+}

@@ -1,0 +1,271 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Dark theme (default) ────────────────────────────────────────────────────── */
+
+:root {
+  color-scheme: dark;
+
+  /* Backgrounds */
+  --bg-base:          #0c0f18;
+  --bg-panel:         #0f1420;
+  --bg-surface:       #141926;
+  --bg-controls:      #090d16;
+  --bg-accent:        #1e1b4b;
+  --bg-frame-active:  #10152a;
+  --bg-exec-line:     #1a2540;
+  --bg-selection:     #1a2d50;
+  --bg-node-completed:#0d1520;
+  --bg-node-overflow: #1a0a0a;
+
+  /* Borders */
+  --border:           #1e2d45;
+  --border-strong:    #263550;
+  --border-hover:     #334155;
+  --border-ring:      #312e81;
+  --border-completed: #1e3d6f;
+  --border-overflow:  #7f1d1d;
+
+  /* Accent */
+  --accent:           #6366f1;
+  --accent-dim:       #4f46e5;
+  --accent-darker:    #3730a3;
+  --accent-text:      #a5b4fc;
+  --accent-text-hover:#e0e7ff;
+  --accent-sub:       #818cf8;
+
+  /* Text */
+  --text-primary:     #e2e8f0;
+  --text-1:           #cbd5e1;
+  --text-2:           #94a3b8;
+  --text-3:           #64748b;
+  --text-muted:       #4b5975;
+  --text-5:           #2d3f5a;
+
+  /* Status */
+  --green:            #4ade80;
+  --green-text:       #86efac;
+  --green-bg:         #052212;
+  --blue-text:        #93c5fd;
+  --blue-bg:          #051829;
+  --red:              #f87171;
+  --red-light:        #fca5a5;
+  --red-bg:           #120404;
+  --red-dim:          #450a0a;
+  --red-border:       #7f1d1d;
+  --red-notice-bg:    #130505;
+
+  /* Misc */
+  --scrollbar:        #1e2d45;
+  --dim-opacity:      0.22;
+}
+
+/* ── Light theme ─────────────────────────────────────────────────────────────── */
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-base:          #f8fafc;
+  --bg-panel:         #ffffff;
+  --bg-surface:       #f1f5f9;
+  --bg-controls:      #e8edf5;
+  --bg-accent:        #eef2ff;
+  --bg-frame-active:  #e8eeff;
+  --bg-exec-line:     #eef2ff;
+  --bg-selection:     #dbeafe;
+  --bg-node-completed:#f8fafc;
+  --bg-node-overflow: #fff1f2;
+
+  --border:           #e2e8f0;
+  --border-strong:    #cbd5e1;
+  --border-hover:     #94a3b8;
+  --border-ring:      #c7d2fe;
+  --border-completed: #bfdbfe;
+  --border-overflow:  #fca5a5;
+
+  --accent:           #6366f1;
+  --accent-dim:       #4f46e5;
+  --accent-darker:    #4338ca;
+  --accent-text:      #4338ca;
+  --accent-text-hover:#312e81;
+  --accent-sub:       #6366f1;
+
+  --text-primary:     #0f172a;
+  --text-1:           #1e293b;
+  --text-2:           #334155;
+  --text-3:           #475569;
+  --text-muted:       #64748b;
+  --text-5:           #94a3b8;
+
+  --green:            #16a34a;
+  --green-text:       #15803d;
+  --green-bg:         #dcfce7;
+  --blue-text:        #1d4ed8;
+  --blue-bg:          #dbeafe;
+  --red:              #dc2626;
+  --red-light:        #ef4444;
+  --red-bg:           #fef2f2;
+  --red-dim:          #fee2e2;
+  --red-border:       #fca5a5;
+  --red-notice-bg:    #fff5f5;
+
+  --scrollbar:        #e2e8f0;
+  --dim-opacity:      0.35;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────────── */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  background: var(--bg-base);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  height: 44px;
+  padding: 0 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding-right: 1rem;
+  border-right: 1px solid var(--border);
+  flex-shrink: 0;
+  height: 100%;
+}
+
+.logo-icon { font-size: 1.15rem; }
+
+.logo-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.4px;
+}
+
+/* ── 3-column main layout ────────────────────────────────────────────────────── */
+
+.app-main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.pane-editor {
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.pane-callstack {
+  flex-shrink: 0;
+  overflow: hidden;
+  border-left: none;
+}
+
+.pane-calltree {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ── Draggable resizer ───────────────────────────────────────────────────────── */
+
+.resizer {
+  flex-shrink: 0;
+  width: 4px;
+  cursor: col-resize;
+  background: var(--border);
+  position: relative;
+  transition: background 0.15s;
+  z-index: 10;
+}
+
+.resizer::after {
+  content: '';
+  position: absolute;
+  inset: -4px 0;
+}
+
+.resizer::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 28px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--text-5) 0px, var(--text-5) 3px,
+    transparent 3px, transparent 6px
+  );
+  border-radius: 2px;
+  opacity: 0.35;
+  transition: opacity 0.15s;
+}
+
+.resizer:hover,
+.resizer:active {
+  background: var(--accent);
+}
+
+.resizer:hover::before { opacity: 0; }
+
+/* ── Error screen ────────────────────────────────────────────────────────────── */
+
+.error-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: var(--red);
+  font-size: 0.9rem;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────────── */
+
+@media (max-width: 700px) {
+  .app-main {
+    flex-direction: column;
+  }
+  .pane-editor {
+    flex: none;
+    width: 100% !important;
+    height: 40%;
+    border-bottom: 1px solid var(--border);
+  }
+  .pane-callstack {
+    flex: none;
+    width: 100% !important;
+    height: 30%;
+    border-bottom: 1px solid var(--border);
+  }
+  .pane-calltree {
+    flex: 1;
+    width: 100% !important;
+  }
+  .resizer {
+    display: none;
+  }
+}
