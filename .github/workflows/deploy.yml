@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to Blog
 
 on:
   push:
@@ -7,16 +7,34 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - run: npm ci
       - run: npm run build
-      - uses: peaceiris/actions-gh-pages@v4
+
+      - name: Checkout blog repo
+        uses: actions/checkout@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          repository: thisisbalu/thisisbalu.github.io
+          token: ${{ secrets.BLOG_DEPLOY_TOKEN }}
+          path: blog
+
+      - name: Copy build into blog projects folder
+        run: |
+          rm -rf blog/projects/unravel-recursion
+          mkdir -p blog/projects/unravel-recursion
+          cp -r dist/. blog/projects/unravel-recursion/
+
+      - name: Commit and push to blog repo
+        run: |
+          cd blog
+          git config user.name "thisisbalu"
+          git config user.email "baluatcomputerscience@gmail.com"
+          git add projects/unravel-recursion
+          git diff --cached --quiet || git commit -m "Deploy unravel-recursion"
+          git push
