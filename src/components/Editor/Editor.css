@@ -61,7 +61,7 @@
 .hint {
   margin-left: auto;
   font-size: 0.72rem;
-  color: var(--border-strong);
+  color: var(--text-muted);
 }
 
 .editor-container {

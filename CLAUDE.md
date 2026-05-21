@@ -108,11 +108,11 @@ unravel-recursion/
 
 ## Theming Implementation
 
-- All colors defined as CSS custom properties in `App.css` under `:root` (light, default) and `[data-theme="dark"]`
+- All colors defined as CSS custom properties in `App.css` under `:root` (light, default) and `[data-theme="dark"]` (dark override)
 - `App.jsx` syncs `document.documentElement.setAttribute('data-theme', theme)` via `useEffect`
 - CodeMirror theme uses `var(--*)` strings — browser resolves them at paint time, no re-init needed
 - D3 SVG attributes (set via `.attr()`) cannot use CSS variables — `CallTree.jsx` maintains a `THEME_COLORS` object with explicit hex values for both themes; `theme` is in the useEffect dependency array so D3 re-renders on toggle
-- `--dim-opacity` is `0.45` (light) and `0.22` (dark) to keep dimmed lines readable on both backgrounds
+- `--dim-opacity` is `0.35` (light) and `0.22` (dark) to keep dimmed lines readable on both backgrounds
 
 ## Deployment
 

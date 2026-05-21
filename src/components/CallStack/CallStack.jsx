@@ -132,7 +132,7 @@ export default function CallStack() {
               !String(v).startsWith('<function') && !String(v).startsWith('<built')
           )
           return (
-            <div key={i} className={`stack-frame ${isTop ? 'frame-active' : ''}`}>
+            <div key={stack.length - 1 - i} className={`stack-frame ${isTop ? 'frame-active' : ''}`}>
               <div className="frame-header">
                 <span className="frame-name">
                   {f.funcName === '<module>'

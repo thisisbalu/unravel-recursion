@@ -83,7 +83,7 @@ function buildDecorations(view, activeLine, locals) {
       } else {
         decos.push(Decoration.line({ class: 'cm-dim-line' }).range(line.from))
       }
-    } catch (_) { /* line out of range */ }
+    } catch (_) { /* line index out of document range — safe to skip */ }
   }
 
   return Decoration.set(decos, true)

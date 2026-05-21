@@ -73,6 +73,7 @@ export default function CallTree() {
   const svgRef  = useRef(null)
   const zoomRef = useRef(null)
   const prevNodeCountRef = useRef(0)
+  const treeBoundsRef = useRef(null)
 
   const { frames, currentFrameIndex, viewMode, selectedCallNodeId, setSelectedCallNodeId, theme } = useStore()
   const frame = frames[currentFrameIndex]
@@ -276,6 +277,11 @@ export default function CallTree() {
 
     nodeSel.exit().remove()
 
+    // ── Store bounds for fit button ───────────────────────────────────────────
+    if (treeW > 0 && treeH > 0) {
+      treeBoundsRef.current = { treeLeft, treeRight, treeTop, treeW, treeH }
+    }
+
     // ── Auto-fit when tree grows ──────────────────────────────────────────────
     const nodeCount = flattenTree(tree).length
     if (nodeCount !== prevNodeCountRef.current && treeW > 0 && treeH > 0) {
@@ -308,11 +314,19 @@ export default function CallTree() {
             className="fit-btn"
             title="Fit tree to view"
             onClick={() => {
-              if (!svgRef.current || !zoomRef.current) return
-              prevNodeCountRef.current = 0
+              if (!svgRef.current || !zoomRef.current || !treeBoundsRef.current) return
+              const { treeLeft, treeRight, treeTop, treeW, treeH } = treeBoundsRef.current
+              const container = svgRef.current.parentElement
+              const cW = container.clientWidth  || 400
+              const cH = container.clientHeight || 300
+              const margin = 20
+              const rawScale = Math.min((cW - margin * 2) / treeW, (cH - margin * 2) / treeH, 1.4)
+              const scale = Math.max(rawScale, MIN_SCALE)
+              const tx = cW / 2 - ((treeLeft + treeRight) / 2) * scale
+              const ty = margin - treeTop * scale
               d3.select(svgRef.current)
                 .transition().duration(300)
-                .call(zoomRef.current.transform, d3.zoomIdentity)
+                .call(zoomRef.current.transform, d3.zoomIdentity.translate(tx, ty).scale(scale))
             }}
           >
             ⊡ fit
