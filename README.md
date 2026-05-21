@@ -60,6 +60,8 @@ Scrub forward and backward through execution like a timeline. Pause on any frame
 | Permutations | Branching factor shrinks each level — 3 characters, 6 leaves, 16 calls |
 | Mutual Recursion | Two functions calling each other — the stack alternates between them |
 | Fast Power | O(log n) via halving — 2^10 in ~5 calls instead of 10 |
+| Tree Traversal | Recursion on a data tree — the call tree mirrors the data structure exactly |
+| Backtracking | Paths explored then abandoned — the call tree grows deep, hits dead ends, unwinds |
 
 ---
 

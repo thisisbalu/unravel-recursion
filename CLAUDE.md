@@ -48,7 +48,7 @@ unravel-recursion/
 │   │   ├── tracer.py        # Python tracer — defines collect_frames(), imported as ?raw
 │   │   └── pyodide.js       # Pyodide CDN loader + runCode() executor
 │   ├── store/index.js       # Zustand store with all app state + actions
-│   ├── examples/index.js    # 10 pre-built programs (see Examples section below)
+│   ├── examples/index.js    # 12 pre-built programs (see Examples section below)
 │   ├── components/
 │   │   ├── LoadingScreen/   # Pyodide download progress bar
 │   │   ├── Editor/          # CodeMirror 6 with line highlight, inline values, dimming via StateField
@@ -105,6 +105,8 @@ unravel-recursion/
 | `permutations` | Permutations | Fan-out branching (n! leaves) |
 | `mutual_recursion` | Mutual Recursion | Two functions calling each other alternately |
 | `fast_power` | Fast Power | O(log n) via halving — only ~5 calls for 2^10 |
+| `tree_traversal` | Tree Traversal | Recursion on a data tree — call tree mirrors the data structure |
+| `backtracking` | Backtracking | Grid path finding — branches explored, dead ends unwound via pop |
 
 ## Theming Implementation
 
