@@ -9,8 +9,8 @@ A Python execution visualizer for students hosted on GitHub Pages. The core goal
 ## Commands
 
 ```bash
-npm run dev      # start dev server at localhost:5175/unravel-recursion/
-npm run build    # build to /dist for GitHub Pages deployment
+npm run dev      # start dev server at localhost:5173/projects/unravel-recursion/ (port may vary)
+npm run build    # build to /dist, deployed to blog repo by CI
 ```
 
 ## Tech Stack
@@ -59,7 +59,7 @@ unravel-recursion/
 │   ├── App.jsx              # Root layout: header / left editor / right panels / bottom controls
 │   └── App.css              # Full-viewport layout with CSS custom properties for theming
 ├── .github/workflows/deploy.yml  # GitHub Actions: push to main → build → gh-pages
-└── vite.config.js           # base: '/unravel-recursion/', pyodide excluded from optimizeDeps
+└── vite.config.js           # base: '/projects/unravel-recursion/', pyodide excluded from optimizeDeps
 ```
 
 ## Layout
@@ -91,7 +91,7 @@ unravel-recursion/
 - **Stack overflow teaching moment**: Execution stops, last frame marked 'overflow', red badge shown, explanation in controls bar
 - **Simple vs Technical mode**: Toggles label language across all panels ("current calls" vs "call stack", "stored values" vs "local variables")
 
-## Examples (10 total)
+## Examples (12 total)
 
 | ID | Label | What it teaches |
 |----|-------|-----------------|
@@ -118,7 +118,13 @@ unravel-recursion/
 
 ## Deployment
 
-GitHub Actions workflow (`.github/workflows/deploy.yml`) triggers on push to main, runs `npm ci && npm run build`, deploys `/dist` to `gh-pages` branch via `peaceiris/actions-gh-pages`.
+GitHub Actions workflow (`.github/workflows/deploy.yml`) triggers on push to `main`:
+1. Builds the Vite app (`npm ci && npm run build`)
+2. Checks out `thisisbalu/thisisbalu.github.io` using `BLOG_DEPLOY_TOKEN` secret
+3. Copies `/dist` into `projects/unravel-recursion/` in the blog repo
+4. Commits and pushes — triggers the blog's own Jekyll deploy workflow
+
+Live URL: `www.balasubramanyamlanka.com/projects/unravel-recursion/`
 
 **Pyodide note:** Pyodide is loaded from CDN (`cdn.jsdelivr.net/pyodide/v0.25.1/full/`) — not bundled. The `optimizeDeps.exclude: ['pyodide']` in vite.config.js prevents Vite from trying to pre-bundle it.
 
