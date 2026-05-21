@@ -74,7 +74,7 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:5173/unravel-recursion/` in your browser (Vite picks the next available port if 5173 is in use).
+Open `http://localhost:5173/projects/unravel-recursion/` in your browser (Vite picks the next available port if 5173 is in use).
 
 > The first load fetches Pyodide (Python runtime) from CDN — about 10MB. After that it's cached and instant.
 
